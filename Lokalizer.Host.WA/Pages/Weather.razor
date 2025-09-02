@@ -1,4 +1,6 @@
 ﻿@page "/weather"
+@using Lokalizer.Abstractions
+@using Lokalizer.Application.Contracts
 @inject HttpClient Http
 
 <PageTitle>Weather</PageTitle>
@@ -24,22 +26,14 @@ else
 }
 
 @code {
+    [Inject]
+    protected IRequestSender RequestSender { get; set; } = default!;
+    
     private IQueryable<WeatherForecast>? forecasts;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = (await Http.GetFromJsonAsync<List<WeatherForecast>>("sample-data/weather.json"))!.AsQueryable();
+        var data = await RequestSender.SendAsync<List<WeatherForecast>>(new GetWeatherForecastsRequest(), CancellationToken.None);
+        forecasts = data.AsQueryable();
     }
-
-    public class WeatherForecast
-    {
-        public DateOnly Date { get; set; }
-
-        public int TemperatureC { get; set; }
-
-        public string? Summary { get; set; }
-
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-    }
-
 }
