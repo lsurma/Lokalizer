@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 
-namespace Lokalizer.Host.AzureFunctionsAPI.Controllers;
+namespace Lokalizer.Host.AzFuncAPI.Controllers;
 
 public class QueryController
 {
@@ -16,17 +16,10 @@ public class QueryController
     }
 
     [Function("Query")]
-    public IActionResult Query([HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequest req)
+    public IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequest req)
     {
         _logger.LogInformation("C# HTTP trigger function processed a request.");
-        return new JsonResult(new List<WeatherForecast>()
-        {
-            new(),
-            new(),
-            new(),
-            new(),
-            new()
-        });
+        return new JsonResult(new List<WeatherForecast>());
     }
 
 }
