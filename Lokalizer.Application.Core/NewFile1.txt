@@ -1,0 +1,1 @@
+﻿dotnet ef migrations add InitialCreate --startup-project ..\Lokalizer.Host.AzFuncAPI\Lokalizer.Host.AzFuncAPI.csproj
