@@ -31,4 +31,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Lokalizer.Application.Contracts\Lokalizer.Application.Contracts.csproj" />
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="DAL\" />
+    </ItemGroup>
 </Project>
